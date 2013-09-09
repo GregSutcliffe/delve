@@ -1,0 +1,16 @@
+<p>
+  <strong>Title:</strong>
+  <%= @scanner.name %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @scanner.device_url %>
+</p>
+
+<p>
+  <%= link_to 'Acquire Image', acquire_scanner_path(@scanner) %>
+</p>
+
+<%= link_to 'Back', scanners_path %>
+| <%= link_to 'Edit', edit_scanner_path(@scanner) %>

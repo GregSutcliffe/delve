@@ -1,0 +1,25 @@
+<%= form_for @scanner do |f| %>
+<% if @scanner.errors.any? %>
+  <div id="errorExplanation">
+  <h2><%= pluralize(@scanner.errors.count, "error") %> prohibited this Scanner from being saved:</h2>
+  <ul>
+    <% @scanner.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+  <% end %>
+<p>
+<%= f.label :name %><br>
+<%= f.text_field :name %>
+</p>
+
+<p>
+<%= f.label :device_url %><br>
+<%= f.text_area :device_url %>
+</p>
+
+<p>
+<%= f.submit %>
+</p>
+<% end %>

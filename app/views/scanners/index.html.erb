@@ -1,0 +1,21 @@
+<h1>Listing Scanners</h1>
+
+<%= link_to 'New scanner', new_scanner_path %>
+
+<table>
+  <tr>
+    <th>Label</th>
+    <th>Device Url</th>
+  </tr>
+
+  <% @scanners.each do |scanner| %>
+    <tr>
+      <td><%= scanner.name %></td>
+      <td><%= scanner.device_url %></td>
+      <td><%= link_to 'Show', scanner_path(scanner) %></td>
+      <td><%= link_to 'Edit', edit_scanner_path(scanner) %></td>
+      <td><%= link_to 'Destroy', scanner_path(scanner),
+              method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
