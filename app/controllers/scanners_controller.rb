@@ -45,7 +45,7 @@ class ScannersController < ApplicationController
 
   def acquire
     @scanner = Scanner.find(params[:id])
-    @scanner.get_image
+    @scanner.acquire
     redirect_to :back
   end
 

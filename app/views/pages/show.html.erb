@@ -1,0 +1,17 @@
+<p>
+  <strong>Label:</strong>
+  <%= @page.label %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @page.path %>
+</p>
+
+<p>
+  <%= link_to "View fullsize", image_path("/scans/#{@page.path}"), :target => "_blank" %>
+  | <%= link_to 'Download page', "/scans/#{@page.path}" %>
+</p>
+
+<%= link_to 'Back', pages_path %>
+| <%= link_to 'Edit', edit_page_path(@page) %>

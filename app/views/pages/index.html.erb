@@ -1,0 +1,23 @@
+<h1>Listing Pages</h1>
+
+<table>
+  <tr>
+    <th>Label</th>
+    <th>Path</th>
+  </tr>
+
+  <% @pages.each do |page| %>
+    <tr>
+      <td><%= page.label %></td>
+      <td><%= page.path %></td>
+      <td><%= link_to 'Show', page_path(page) %></td>
+      <td><%= link_to 'Edit', edit_page_path(page) %></td>
+      <td><%= link_to 'Destroy', page_path(page),
+              method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<%= link_to 'Back', welcome_index_path %>
+| <%= link_to 'Scanners', scanners_path %>

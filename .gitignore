@@ -18,3 +18,7 @@
 # RBenv
 .rbenv-gemsets
 .ruby-version
+
+# Stuff
+*.swp
+public/scans

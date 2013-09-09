@@ -28,6 +28,10 @@ TODO section for some of the things we have planned.
 * Tags
 * Image hashing with PHash
 
+## Nice-to-have
+
+* Export image+text as hidden-text embedded PDF
+
 # Copyright
 
 Copyright (c) 2012-2013 Greg Sutcliffe

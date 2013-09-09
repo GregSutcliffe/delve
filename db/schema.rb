@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130908230249) do
+ActiveRecord::Schema.define(version: 20130909212623) do
+
+  create_table "pages", force: true do |t|
+    t.string   "label"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "scanners", force: true do |t|
     t.string   "name"
