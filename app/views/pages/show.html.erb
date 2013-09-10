@@ -1,16 +1,20 @@
 <p>
-  <strong>Label:</strong>
-  <%= @page.label %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @page.path %>
+<table>
+  <tr>
+    <th><strong>Label:</strong></th>
+    <th><strong>Text:</strong></th>
+  </tr>
+  <tr>
+    <td><%= @page.label %></td>
+    <td><%= @page.path %></td>
+  </tr>
+</table>
 </p>
 
 <p>
+  <%= image_tag "/scans/#{@page.path}", size: '200x200' %>
+<br/>
   <%= link_to "View fullsize", image_path("/scans/#{@page.path}"), :target => "_blank" %>
-  | <%= link_to 'Download page', "/scans/#{@page.path}" %>
 </p>
 
 <%= link_to 'Back', pages_path %>

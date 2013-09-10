@@ -13,4 +13,5 @@ class PagesController < ApplicationController
 
     redirect_to pages_path
   end
+
 end

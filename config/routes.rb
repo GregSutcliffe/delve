@@ -10,6 +10,8 @@ Delve::Application.routes.draw do
 
   resources :pages
 
+  #map.thumbnail "/scans/thumbs/:id", :controller => "images", :action => "get_thumb"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

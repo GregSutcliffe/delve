@@ -9,15 +9,18 @@ TODO section for some of the things we have planned.
 
 # TODO
 
+## Needs tests
+
+* models for Page and Scanner
+* find and scan from local scanner
+* display stored images
+
 ## Short term goals
 
-* find and scan from local scanner
 * Import from image
 * import from pdf
-* models for Page and Scanner
 * Rotate images
 * OCR images
-* Display stored images
 
 ## Longer term
 
