@@ -1,16 +1,24 @@
+<h1>Editing Page</h1>
+
+<%= form_for @page do |f| %>
+<% if @page.errors.any? %>
+  <div id="errorExplanation">
+  <h2><%= pluralize(@page.errors.count, "error") %> prohibited this Page from being saved:</h2>
+  <ul>
+    <% @page.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+  <% end %>
 <p>
-  <strong>Label:</strong>
-  <%= @page.label %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @page.path %>
+<%= f.label :label %><br>
+<%= f.text_field :label %>
 </p>
 
 <p>
-<%= link_to 'View fullsize', "http://localhost:3000/scans/#{@page.path} %>
+<%= f.submit %>
 </p>
+<% end %>
 
 <%= link_to 'Back', pages_path %>
-| <%= link_to 'Edit', edit_page_path(@page) %>
