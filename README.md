@@ -17,12 +17,22 @@ TODO section for some of the things we have planned.
 
 ## Short term goals
 
+* Make it look better
+* Add settings system
+  * Global
+    1. Scans location
+    2. Default Scanner
+  * Per-Scanner
+    1. Scan Resolution
+    2. Greyscale vs colour
+* Quick Acquire via default scanner
+
+## Longer term
+
 * Import from image
 * import from pdf
 * Rotate images
 * OCR images
-
-## Longer term
 
 * Model for Document
   * Associate Pages into Documents
