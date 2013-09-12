@@ -14,11 +14,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+coverage
+*.swp
 
 # RBenv
 .rbenv-gemsets
 .ruby-version
 
-# Stuff
-*.swp
+# Scanned images
 public/scans
