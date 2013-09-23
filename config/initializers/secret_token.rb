@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Delve::Application.config.secret_key_base = '243767716e6108fe62a8d8c061a7981ec238347175ef1c1543a0b6da3c8b7216a76a9edc07d617fc9f740d2c03958e94b59da05389d233f45ae57a01ad91ac0e'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Delve::Application.config.secret_key_base = secure_token
