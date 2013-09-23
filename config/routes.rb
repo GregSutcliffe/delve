@@ -1,8 +1,7 @@
 Delve::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
-  get "welcome/index"
-  root 'welcome#index'
+  get "static_pages/about"
 
   resources :scanners do
     member do
