@@ -1,4 +1,13 @@
-<h1>Hello, Welcome to Delve!</h1>
-<%= link_to "Scanners", controller: "scanners" %>
-<br />
-<%= link_to 'Pages', controller: "pages" %>
+<div class="center hero-unit">
+  <h1>Welcome to Delve!</h1>
+
+  <h2>
+    This is the Delve home page. See the
+    <a href="https://github.com/GregSutcliffe/delve">Delve homepage</a>
+    for more information.
+  </h2>
+
+  <a href="#" class="btn btn-large btn-primary">Scan something now!</a>
+</div>
+
+<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
