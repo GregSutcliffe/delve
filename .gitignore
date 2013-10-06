@@ -12,10 +12,10 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
+*.swp
 /log/*.log
 /tmp
 coverage
-*.swp
 
 # RBenv
 .rbenv-gemsets
@@ -25,14 +25,15 @@ coverage
 public/scans
 
 # # Ignore other unneeded files.
-database.yml
-doc/
 *.swp
 *~
-.project
 .DS_Store
 .idea
+.project
+.rspec
 .secret
-coverage
 Gemfile.lock
+coverage
+database.yml
 db/schema.rb
+doc/
