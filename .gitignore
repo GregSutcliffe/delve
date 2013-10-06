@@ -34,3 +34,5 @@ doc/
 .idea
 .secret
 coverage
+Gemfile.lock
+db/schema.rb
