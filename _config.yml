@@ -1,4 +1,4 @@
-exclude: [ Gemfile, Gemfile.lock, Procfile, vendor, gems, README.md]
+exclude: [ Gemfile, Gemfile.lock, Procfile, vendor, gems, README.md, db, coverage, logs]
 
 sitename: Delve
 tagline: Delve is a tool to help scan, OCR, index, and store documents
