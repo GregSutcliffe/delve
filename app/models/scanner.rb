@@ -5,10 +5,8 @@ class Scanner < ActiveRecord::Base
   STORAGE_DIR = ::Rails.root.join('public','scans')
   DATE_FORMAT = '%F_%H-%M-%S'
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
-  validates_presence_of :device_url
-  validates_uniqueness_of :device_url
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :device_url, presence: true, uniqueness: true
 
   def acquire
     # Use timestamp until we can think of something better
