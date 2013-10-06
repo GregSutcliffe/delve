@@ -16,6 +16,17 @@ describe 'Static pages' do
 
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
+
+    it 'should direct scan-now to new scanner when no scanners exist' do
+      Scanner.all.each { |s| s.destroy }
+      click_link 'Scan something now!'
+      expect(page).to have_title(full_title('New Scanner'))
+    end
+    it 'should direct scan-now to aquire on first scanner' do
+      Scanner.create(name: "Example Scanner", device_url: "net://host/path")
+      click_link 'Scan something now!'
+      expect(page).to have_content('Example Scanner')
+    end
   end
 
   describe "Help page" do
@@ -42,7 +53,8 @@ describe 'Static pages' do
     it_should_behave_like 'all static pages'
   end
 
-  it 'should have the right links on the layout' do
+  describe 'Layout links'
+  it 'should have the right static links' do
     visit root_path
     click_link 'About'
     expect(page).to have_title(full_title('About Me'))
@@ -50,11 +62,12 @@ describe 'Static pages' do
     expect(page).to have_title(full_title('Help'))
     click_link 'Contact'
     expect(page).to have_title(full_title('Contact'))
-    click_link 'Delve'
     click_link 'Scanners'
     expect(page).to have_title(full_title('Scanners'))
     click_link 'Pages'
     expect(page).to have_title(full_title('Pages'))
+    click_link 'Delve'
+    expect(page).to have_title(full_title(''))
   end
 
 end

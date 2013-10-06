@@ -49,6 +49,15 @@ class ScannersController < ApplicationController
     redirect_to :back
   end
 
+  def scan_now
+    @scanner = Scanner.first
+    if @scanner
+      redirect_to @scanner
+    else
+      redirect_to :new_scanner
+    end
+  end
+
   private
 
   def post_params
