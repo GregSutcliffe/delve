@@ -1,7 +1,8 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Delve", root_path, id: "logo" %>
+      <%= link_to image_tag("delve.svg", :size => "26x26", class: "brand", :alt => "Delve"), root_path %>
+      <%= link_to "Delve", root_path, id: "logo", class: "brand" %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Scanners", scanners_path %></li>
