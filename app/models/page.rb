@@ -5,9 +5,8 @@ class Page < ActiveRecord::Base
 
   before_destroy :ensure_file_deleted
 
-  validates_presence_of :label
-  validates_presence_of :path
-  validates_uniqueness_of :path
+  validates :label, presence: true
+  validates :path, presence: true, uniqueness: true
 
   private
 
