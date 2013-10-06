@@ -1,0 +1,29 @@
+exclude: [ Gemfile, Gemfile.lock, Procfile, vendor, gems, README.md]
+
+sitename: Delve
+tagline: Delve is a tool to help scan, OCR, index, and store documents
+description: Delve provides a complete document management system. It can acquire
+  images from scanners on the network, perform Optical Character Recognition upon
+  acquired images, build up documents from sets of pages, and allow you to name, tag
+  and store the doucments. The Location field allows for you to find the hardcopy
+  quickly when you really need it.
+
+production_url: http://gregsutcliffe.github.io/delve
+url: http://gregsutcliffe.github.io/delve
+baseurl: /
+
+safe:        true
+
+future:      false
+pygments:    true
+markdown:    rdiscount
+
+navigation:
+- text: Screenshots & Videos
+  url: media.html
+- text: Contribute
+  url: contribute.html
+- text: Support
+  url: support.html
+- text: API
+  url: api.html
