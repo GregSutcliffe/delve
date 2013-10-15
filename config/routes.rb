@@ -14,6 +14,7 @@ Delve::Application.routes.draw do
   end
 
   resources :pages
+  resources :documents
 
   #map.thumbnail "/scans/thumbs/:id", :controller => "images", :action => "get_thumb"
 

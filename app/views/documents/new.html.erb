@@ -1,0 +1,18 @@
+<% provide(:title, 'New Document') %>
+<h1>New Document</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@document) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+
+      <%= f.submit "Create Document", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

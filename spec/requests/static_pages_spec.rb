@@ -66,6 +66,8 @@ describe 'Static pages' do
     expect(page).to have_title(full_title('Scanners'))
     click_link 'Pages'
     expect(page).to have_title(full_title('Pages'))
+    click_link 'Documents'
+    expect(page).to have_title(full_title('Documents'))
     click_link 'Delve'
     expect(page).to have_title(full_title(''))
   end

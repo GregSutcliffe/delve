@@ -1,0 +1,22 @@
+<% provide(:title, 'Documents') %>
+<h1>Listing Documents</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+  </tr>
+
+  <% @documents.each do |doc| %>
+    <tr>
+      <td><%= doc.name %></td>
+      <td><%= doc.location %></td>
+      <td><%= link_to 'Show', document_path(doc) %></td>
+      <td><%= link_to 'Edit', edit_document_path(doc) %></td>
+      <td><%= link_to 'Destroy', document_path(doc),
+              method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
