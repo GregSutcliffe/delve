@@ -5,7 +5,8 @@ class Page < ActiveRecord::Base
 
   before_destroy :ensure_file_deleted
 
-  validates :label, presence: true
+  belongs_to :document
+  default_scope -> { order('created_at DESC') }
   validates :path, presence: true, uniqueness: true
 
   private

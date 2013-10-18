@@ -42,7 +42,6 @@ describe Scanner do
 
       page = @scanner.acquire
       expect(page).to be_valid
-      expect(page.label).to eq('2013-09-12_00-00-00')
       expect(page.path).to eq('2013-09-12_00-00-00.jpg')
     end
   end

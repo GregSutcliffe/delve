@@ -72,10 +72,19 @@ describe "DocumentPages" do
 
   describe "document page" do
     let(:doc) { FactoryGirl.create(:document) }
+    let!(:p1) { FactoryGirl.create(:page, document: doc, path: "Foo") }
+    let!(:p2) { FactoryGirl.create(:page, document: doc, path: "Bar") }
+
     before { visit document_path(doc) }
 
     it { should have_content(doc.name) }
     it { should have_title(doc.name) }
+
+    describe "pages" do
+      it { should have_link('View fullsize', href: "/scans/#{p1.path}") }
+      it { should have_link('View fullsize', href: "/scans/#{p2.path}") }
+      it { should have_content(doc.pages.count) }
+    end
   end
 
   describe "edit" do
@@ -90,7 +99,7 @@ describe "DocumentPages" do
     describe "with invalid information" do
       before do
         FactoryGirl.create(:document,:name => "test1")
-        fill_in "Name",         with: "test1"
+        fill_in "Name", with: "test1"
         click_button "Save changes"
       end
 

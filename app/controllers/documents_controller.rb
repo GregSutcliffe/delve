@@ -6,6 +6,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    @pages = @document.pages.paginate(page: params[:page])
   end
 
   def new

@@ -11,9 +11,8 @@ class Scanner < ActiveRecord::Base
   def acquire
     # Use timestamp until we can think of something better
     if page = get_image
-      time = page.properties['date:create'].to_time.strftime(DATE_FORMAT)
       file = File.basename(page.filename)
-      return Page.create(:label => time, :path => file)
+      return Page.create(:path => file)
     end
     return false
   end

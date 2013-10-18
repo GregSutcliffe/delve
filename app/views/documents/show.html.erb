@@ -7,7 +7,16 @@
       </h1>
       <h2>
         Location: <%= @document.location %>
-      </h2>
+    </h2>
     </section>
   </aside>
+</div>
+<div class="span8">
+  <% if @document.pages.any? %>
+    <h3>Pages (<%= @document.pages.count %>)</h3>
+    <ol class="pages">
+      <%= render @pages %>
+    </ol>
+    <%= will_paginate @pages %>
+  <% end %>
 </div>

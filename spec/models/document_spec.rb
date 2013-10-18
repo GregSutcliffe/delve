@@ -10,6 +10,7 @@ describe Document do
 
   it { should respond_to(:name) }
   it { should respond_to(:location) }
+  it { should respond_to(:pages) }
 
   it { should be_valid }
 
@@ -30,6 +31,30 @@ describe Document do
     end
 
     it { should_not be_valid }
+  end
+
+  describe "pages associations" do
+
+    before { @doc.save }
+    let!(:older_page) do
+      FactoryGirl.create(:page, document: @doc, created_at: 1.day.ago)
+    end
+    let!(:newer_page) do
+      FactoryGirl.create(:page, document: @doc, created_at: 1.hour.ago)
+    end
+
+    it "should have the right pages in the right order" do
+      expect(@doc.pages.to_a).to eq [newer_page, older_page]
+    end
+
+    it "should destroy associated pages" do
+      pages = @doc.pages.to_a
+      @doc.destroy
+      expect(pages).not_to be_empty
+      pages.each do |page|
+        expect(Page.where(id: page.id)).to be_empty
+      end
+    end
   end
 
 end
