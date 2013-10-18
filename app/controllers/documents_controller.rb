@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
 
   def index
-    @documents = Document.all
+    @documents = Document.paginate(page: params[:page])
   end
 
   def show
@@ -19,6 +19,20 @@ class DocumentsController < ApplicationController
       redirect_to @document
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @document = Document.find(params[:id])
+  end
+
+  def update
+    @document = Document.find(params[:id])
+    if @document.update_attributes(document_params)
+      flash[:success] = "Document updated"
+      redirect_to @document
+    else
+      render 'edit'
     end
   end
 

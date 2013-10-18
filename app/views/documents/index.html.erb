@@ -1,22 +1,26 @@
 <% provide(:title, 'Documents') %>
-<h1>Listing Documents</h1>
+<h1>All Documents</h1>
+
+<%= will_paginate %>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Location</th>
+    <th>Last Updated</th>
   </tr>
 
   <% @documents.each do |doc| %>
     <tr>
       <td><%= doc.name %></td>
       <td><%= doc.location %></td>
+      <td><%= doc.updated_at %></td>
       <td><%= link_to 'Show', document_path(doc) %></td>
       <td><%= link_to 'Edit', edit_document_path(doc) %></td>
-      <td><%= link_to 'Destroy', document_path(doc),
+      <td><%= link_to 'Delete', document_path(doc),
               method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
 
-<br />
+<%= will_paginate %>

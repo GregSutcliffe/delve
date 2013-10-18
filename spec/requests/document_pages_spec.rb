@@ -4,6 +4,42 @@ describe "DocumentPages" do
 
   subject { page }
 
+  describe "index" do
+    before do
+      FactoryGirl.create(:document, name: "Bill", location: "Here")
+      FactoryGirl.create(:document, name: "Ben",  location: "There")
+      visit documents_path
+    end
+
+    it { should have_title('Documents') }
+    it { should have_content('All Documents') }
+
+    describe "pagination" do
+
+      before(:all) { 30.times { FactoryGirl.create(:document) } }
+      after(:all)  { Document.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each document" do
+        Document.paginate(page: 1).each do |doc|
+          expect(page).to have_selector('td', text: doc.name)
+        end
+      end
+    end
+
+    describe "delete links" do
+
+      it { should have_link('Delete', href: document_path(Document.first)) }
+      it "should be able to delete a document" do
+        expect do
+          click_link('Delete', match: :first)
+        end.to change(Document, :count).by(-1)
+      end
+    end
+
+  end
+
   describe "new document" do
     before { visit new_document_path }
     let(:submit) { "Create Document" }
@@ -34,12 +70,48 @@ describe "DocumentPages" do
     end
   end
 
-  describe "profile page" do
+  describe "document page" do
     let(:doc) { FactoryGirl.create(:document) }
     before { visit document_path(doc) }
 
     it { should have_content(doc.name) }
     it { should have_title(doc.name) }
+  end
+
+  describe "edit" do
+    let(:doc) { FactoryGirl.create(:document) }
+    before { visit edit_document_path(doc) }
+
+    describe "page" do
+      it { should have_content("Update your document") }
+      it { should have_title("Edit document") }
+    end
+
+    describe "with invalid information" do
+      before do
+        FactoryGirl.create(:document,:name => "test1")
+        fill_in "Name",         with: "test1"
+        click_button "Save changes"
+      end
+
+      it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:new_name)     { "Document I changed" }
+      let(:new_location) { "Bedroom" }
+      before do
+        fill_in "Name",             with: new_name
+        fill_in "Location",         with: new_location
+        click_button "Save changes"
+      end
+
+      it { should have_title(new_name) }
+      it { should have_selector('div.alert.alert-success') }
+      specify { expect(doc.reload.name).to     eq new_name }
+      specify { expect(doc.reload.location).to eq new_location }
+    end
+
   end
 
 end

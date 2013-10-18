@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :document do
-    name     "A Generic Document"
-    location "Study Cabinet 1"
+   sequence(:name)     { |n| "Document #{n}" }
+   sequence(:location) { |n| "Location #{n}"}
   end
 end
