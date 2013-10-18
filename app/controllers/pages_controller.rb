@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
 
-    if @page.update(params[:page].permit(:label))
+    if @page.update(params[:page].permit([:label,:document_id]))
       redirect_to @page
     else
       render 'edit'

@@ -1,12 +1,12 @@
 <p>
 <table>
   <tr>
-    <th><strong>Label:</strong></th>
-    <th><strong>Text:</strong></th>
+    <th><strong>Path:</strong></th>
+    <th><strong>Document:</strong></th>
   </tr>
   <tr>
-    <td><%= @page.label %></td>
     <td><%= @page.path %></td>
+    <td><%= link_to(@page.document.name, document_path(@page.document)) %></td>
   </tr>
 </table>
 </p>

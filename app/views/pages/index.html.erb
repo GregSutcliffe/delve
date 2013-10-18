@@ -9,8 +9,8 @@
 
   <% @pages.each do |page| %>
     <tr>
-      <td><%= page.label %></td>
       <td><%= page.path %></td>
+      <td><%= page.document_id %></td>
       <td><%= link_to 'Show', page_path(page) %></td>
       <td><%= link_to 'Edit', edit_page_path(page) %></td>
       <td><%= link_to 'Destroy', page_path(page),
