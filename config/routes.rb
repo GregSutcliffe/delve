@@ -16,6 +16,8 @@ Delve::Application.routes.draw do
   resources :pages
   resources :documents
 
+  get 'tags/:tag', to: 'documents#index', as: :tag
+
   #map.thumbnail "/scans/thumbs/:id", :controller => "images", :action => "get_thumb"
 
   # The priority is based upon order of creation: first created -> highest priority.

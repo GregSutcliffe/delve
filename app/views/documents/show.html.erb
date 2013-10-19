@@ -5,9 +5,12 @@
       <h1>
         <%= @document.name %>
       </h1>
-      <h2>
+      <p>
         Location: <%= @document.location %>
-    </h2>
+      </p>
+      <p>
+      Tags: <%= raw @document.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+      </p>
     </section>
   </aside>
 </div>

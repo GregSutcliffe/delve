@@ -1,7 +1,11 @@
 class DocumentsController < ApplicationController
 
   def index
-    @documents = Document.paginate(page: params[:page])
+    if params[:tag]
+      @documents = Document.tagged_with(params[:tag]).paginate(page: params[:page])
+    else
+      @documents = Document.paginate(page: params[:page])
+    end
   end
 
   def show
@@ -48,7 +52,7 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:name, :location)
+    params.require(:document).permit(:name, :location, :tag_list)
   end
 
 end

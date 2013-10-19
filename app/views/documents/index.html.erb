@@ -1,20 +1,26 @@
 <% provide(:title, 'Documents') %>
 <h1>All Documents</h1>
 
+<div id="tag_cloud">
+  <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+  <% end %>
+</div>
+
 <%= will_paginate %>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Location</th>
-    <th>Last Updated</th>
+    <th>Created</th>
   </tr>
 
   <% @documents.each do |doc| %>
     <tr>
       <td><%= doc.name %></td>
       <td><%= doc.location %></td>
-      <td><%= doc.updated_at %></td>
+      <td><%= doc.created_at.to_date %></td>
       <td><%= link_to 'Show', document_path(doc) %></td>
       <td><%= link_to 'Edit', edit_document_path(doc) %></td>
       <td><%= link_to 'Delete', document_path(doc),

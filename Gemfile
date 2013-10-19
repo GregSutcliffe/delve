@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1.rc1'
 gem 'sane-ffi'
 gem 'rmagick'
 gem 'bootstrap-sass'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
