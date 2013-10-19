@@ -12,6 +12,16 @@
       <%= f.label :location %>
       <%= f.text_field :location %>
 
+      <%= f.label :tag_list, "Tags (separated by commas)" %>
+      <%= f.text_field :tag_list %>
+
+      <% @selected_pages = @document.pages.map {|p| p.id} if @document.pages %>
+      <%= f.label :pages %>
+      <%= select_tag 'document[form_pages][]', options_for_select(
+        (Page.without_document + @document.pages).map {|p| [p.path,p.id]}, @selected_pages),
+        { :multiple => true } %>
+
+
       <%= f.submit "Create Document", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

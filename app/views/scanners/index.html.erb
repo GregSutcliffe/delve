@@ -13,6 +13,7 @@
     <tr>
       <td><%= scanner.name %></td>
       <td><%= scanner.device_url %></td>
+      <td><%= link_to 'Acquire Image', acquire_scanner_path(scanner) %></td>
       <td><%= link_to 'Show', scanner_path(scanner) %></td>
       <td><%= link_to 'Edit', edit_scanner_path(scanner) %></td>
       <td><%= link_to 'Destroy', scanner_path(scanner),

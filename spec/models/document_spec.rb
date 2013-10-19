@@ -19,11 +19,6 @@ describe Document do
     it { should_not be_valid }
   end
 
-  describe "when location is not present" do
-    before { @doc.location = " " }
-    it { should_not be_valid }
-  end
-
   describe "when name is already taken" do
     before do
       user_with_same_name = @doc.dup

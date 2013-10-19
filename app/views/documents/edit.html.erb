@@ -9,11 +9,11 @@
       <%= f.label :name %>
       <%= f.text_field :name %>
 
-      <%= f.label :tag_list, "Tags (separated by commas)" %>
-      <%= f.text_field :tag_list %>
-
       <%= f.label :location %>
       <%= f.text_field :location %>
+
+      <%= f.label :tag_list, "Tags (separated by commas)" %>
+      <%= f.text_field :tag_list %>
 
       <% @selected_pages = @document.pages.map {|p| p.id} if @document.pages %>
       <%= f.label :pages %>
