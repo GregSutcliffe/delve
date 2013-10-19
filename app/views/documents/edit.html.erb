@@ -15,6 +15,12 @@
       <%= f.label :location %>
       <%= f.text_field :location %>
 
+      <% @selected_pages = @document.pages.map {|p| p.id} if @document.pages %>
+      <%= f.label :pages %>
+      <%= select_tag 'document[form_pages][]', options_for_select(
+        (Page.without_document + @document.pages).map {|p| [p.path,p.id]}, @selected_pages),
+        { :multiple => true } %>
+
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 

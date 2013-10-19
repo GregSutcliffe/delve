@@ -3,14 +3,14 @@
 
 <table>
   <tr>
-    <th>Label</th>
     <th>Path</th>
+    <th>Document</th>
   </tr>
 
   <% @pages.each do |page| %>
     <tr>
       <td><%= page.path %></td>
-      <td><%= page.document_id %></td>
+      <td><%= link_to page.document.name, document_path(page.document) %></td>
       <td><%= link_to 'Show', page_path(page) %></td>
       <td><%= link_to 'Edit', edit_page_path(page) %></td>
       <td><%= link_to 'Destroy', page_path(page),
