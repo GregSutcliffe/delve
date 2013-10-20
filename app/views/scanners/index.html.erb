@@ -1,23 +1,29 @@
 <% provide(:title, 'Scanners') %>
-<h1>Listing Scanners</h1>
+<h1>All Scanners</h1>
 
-<%= link_to 'New scanner', new_scanner_path %>
+<div class="right">
+  <%= link_to 'New scanner', new_scanner_path, class: "btn btn-success" %>
+</div>
 
-<table>
+<%= will_paginate %>
+
+<table class="table">
   <tr>
     <th>Label</th>
     <th>Device Url</th>
+    <th>Actions</th>
   </tr>
 
   <% @scanners.each do |scanner| %>
     <tr>
-      <td><%= scanner.name %></td>
+      <td><%= link_to scanner.name, scanner_path(scanner) %></td>
       <td><%= scanner.device_url %></td>
-      <td><%= link_to 'Acquire Image', acquire_scanner_path(scanner) %></td>
-      <td><%= link_to 'Show', scanner_path(scanner) %></td>
-      <td><%= link_to 'Edit', edit_scanner_path(scanner) %></td>
-      <td><%= link_to 'Destroy', scanner_path(scanner),
+      <td><%= link_to 'Acquire Image', acquire_scanner_path(scanner), class: "btn btn-primary btn-small" %>
+          <%= link_to 'Edit', edit_scanner_path(scanner), class: "btn btn-small" %>
+          <%= link_to 'Delete', scanner_path(scanner), class: "btn btn-danger btn-small",
               method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
+
+<%= will_paginate %>

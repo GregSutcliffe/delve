@@ -28,6 +28,28 @@ describe "DocumentPages" do
       end
     end
 
+    describe "tags" do
+      before do
+        doc=Document.first
+        doc.tag_list="tag1"
+        doc.save!
+        visit tag_path('tag1')
+      end
+
+      it "should list tag_cloud" do
+        expect(page).to have_link('tag1', href: tag_path('tag1'))
+      end
+      it "should list each tagged document" do
+        Document.all.each do |doc|
+          if doc.tag_list.include?('tag1')
+            expect(page).to have_selector('td', text: doc.name)
+          else
+            expect(page).not_to have_selector('td', text: doc.name)
+          end
+        end
+      end
+    end
+
     describe "delete links" do
 
       it { should have_link('Delete', href: document_path(Document.first)) }

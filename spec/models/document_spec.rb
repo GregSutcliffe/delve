@@ -37,9 +37,17 @@ describe Document do
     let!(:newer_page) do
       FactoryGirl.create(:page, document: @doc, created_at: 1.hour.ago)
     end
+    let!(:unused_page) do
+      FactoryGirl.create(:page, document: nil)
+    end
 
     it "should have the right pages in the right order" do
       expect(@doc.pages.to_a).to eq [newer_page, older_page]
+    end
+
+    it "should be able to associate from an ID array" do
+      @doc.form_pages=[unused_page.id]
+      expect(@doc.pages.to_a).to eq [unused_page]
     end
 
     it "should destroy associated pages" do

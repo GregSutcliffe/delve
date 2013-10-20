@@ -1,5 +1,12 @@
 <% provide(:title, "Edit document") %>
 <h1>Update your document</h1>
+<div id="tag_cloud">
+  <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+  <% end %>
+</div>
+
+<br/>
 
 <div class="row">
   <div class="span6 offset3">

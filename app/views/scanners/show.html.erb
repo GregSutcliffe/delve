@@ -1,16 +1,18 @@
-<p>
-  <strong>Title:</strong>
-  <%= @scanner.name %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @scanner.device_url %>
-</p>
+<% provide(:title, @scanner.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @scanner.name %>
+      </h1>
+      <%= link_to 'Edit', edit_scanner_path(@scanner) %>
+    </section>
+  </aside>
+</div>
+      <p>
+        <%= @scanner.device_url %>
+      </p>
 
 <p>
-  <%= link_to 'Acquire Image', acquire_scanner_path(@scanner) %>
+  <%= link_to 'Acquire Image', acquire_scanner_path(@scanner), class: "btn btn-primary" %>
 </p>
-
-<%= link_to 'Back', scanners_path %>
-| <%= link_to 'Edit', edit_scanner_path(@scanner) %>

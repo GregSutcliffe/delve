@@ -1,6 +1,10 @@
 <% provide(:title, 'Documents') %>
 <h1>All Documents</h1>
 
+<div class="right">
+  <%= link_to "New Document", new_document_path, class: "btn btn-success" %>
+</div>
+
 <div id="tag_cloud">
   <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
     <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
@@ -9,25 +13,25 @@
 
 <br/>
 
-<%= link_to "New Document", new_document_path, {} %>
-
 <%= will_paginate %>
 
-<table>
+<table class="table">
   <tr>
     <th>Name</th>
+    <th>Pages</th>
     <th>Location</th>
     <th>Created</th>
+    <th>Actions</th>
   </tr>
 
   <% @documents.each do |doc| %>
     <tr>
-      <td><%= doc.name %></td>
+      <td><%= link_to doc.name, document_path(doc) %></td>
+      <td><%= doc.pages.count %></td>
       <td><%= doc.location %></td>
       <td><%= doc.created_at.to_date %></td>
-      <td><%= link_to 'Show', document_path(doc) %></td>
-      <td><%= link_to 'Edit', edit_document_path(doc) %></td>
-      <td><%= link_to 'Delete', document_path(doc),
+      <td><%= link_to 'Edit', edit_document_path(doc), class: "btn btn-small" %>
+          <%= link_to 'Delete', document_path(doc), class: "btn btn-small btn-danger",
               method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

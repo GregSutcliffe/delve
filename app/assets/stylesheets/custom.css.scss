@@ -177,6 +177,10 @@ input {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
+  h1 {
+    text-align: left;
+    font-size: 2.2em;
+  }
 }
 .content {
   display: block;
@@ -184,18 +188,30 @@ input {
 .timestamp {
   color: $grayLight;
 }
+
 aside {
   textarea {
     height: 100px;
     margin-bottom: 5px;
   }
-} 
+}
 
 #tag_cloud {
-  width: 400px;
+  width: 60%;
+  margin-left: auto ;
+  margin-right: auto ;
   line-height: 1.6em;
   .s { font-size: 0.8em; }
   .m { font-size: 1.2em; }
   .l { font-size: 1.8em; }
 }
 
+/* Stuff I managed to write myself */
+
+/* basic float for buttons */
+.right {
+  float:right;
+}
+.left {
+  float:left;
+}

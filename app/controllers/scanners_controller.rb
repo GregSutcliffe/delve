@@ -1,7 +1,7 @@
 class ScannersController < ApplicationController
 
   def index
-    @scanners = Scanner.all
+    @scanners = Scanner.paginate(page: params[:page])
   end
 
   def show
@@ -14,8 +14,8 @@ class ScannersController < ApplicationController
 
   def create
     @scanner = Scanner.new(post_params)
-
     if @scanner.save
+      flash[:success] = "Scanner created!"
       redirect_to @scanner
     else
       render 'new'
@@ -45,14 +45,18 @@ class ScannersController < ApplicationController
 
   def acquire
     @scanner = Scanner.find(params[:id])
-    @scanner.acquire
-    redirect_to :back
+    if @scanner.acquire
+      flash[:success] = "Page acquired!"
+    else
+      flash[:error] = "Page failed to acquire!"
+    end
+    redirect_to @scanner
   end
 
   def scan_now
     @scanner = Scanner.first
     if @scanner
-      redirect_to @scanner
+      redirect_to acquire_scanner_path(@scanner)
     else
       redirect_to :new_scanner
     end

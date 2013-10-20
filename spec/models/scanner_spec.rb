@@ -44,6 +44,12 @@ describe Scanner do
       expect(page).to be_valid
       expect(page.path).to eq('2013-09-12_00-00-00.jpg')
     end
+    
+    it "returns false for acquire when get_image cannot be acquired" do
+      @scanner.should_receive(:`).once.with("scanimage -d #{@scanner.device_url}").and_return(Exception)
+      page = @scanner.acquire
+      expect(page).to be_false
+    end
   end
 
 end

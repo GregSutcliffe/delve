@@ -22,8 +22,9 @@ describe 'Static pages' do
       click_link 'Scan something now!'
       expect(page).to have_title(full_title('New Scanner'))
     end
-    it 'should direct scan-now to aquire on first scanner' do
+    it 'should direct scan-now to acquire on first scanner' do
       Scanner.create(name: "Example Scanner", device_url: "net://host/path")
+      Scanner.any_instance.should_receive(:acquire).and_return(true)
       click_link 'Scan something now!'
       expect(page).to have_content('Example Scanner')
     end

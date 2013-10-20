@@ -1,25 +1,31 @@
 <% provide(:title, @document.name) %>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @document.name %>
-      </h1>
-      <p>
-        Location: <%= @document.location %>
-      </p>
-      <p>
-      Tags: <%= raw @document.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
-      </p>
-    </section>
-  </aside>
+  <h1>
+    <%= @document.name %>
+  </h1>
 </div>
-<div class="span8">
+<br/>
+<div class="right">
+  <% if @document.location.blank? %>
+    <p>Location: <span class="btn" disabled="disabled">No hardcopy kept</span></p>
+  <% else %>
+    <p>Location: <span class="btn" disabled="disabled"><%= @document.location %></span></p>
+  <% end %>
+  <%= link_to 'Edit', edit_document_path(@document), class: "right btn btn-success" %>
+</div>
+<div class="left">
+  <p>
+    Tags: <%= raw @document.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+  </p>
+</div>
+<br/>
+<br/>
+<div class="pages">
   <% if @document.pages.any? %>
-    <h3>Pages (<%= @document.pages.count %>)</h3>
-    <ol class="pages">
+    <h1>Pages (<%= @document.pages.count %>)</h1>
+    <ul class="pages">
       <%= render @pages %>
-    </ol>
+    </ul>
     <%= will_paginate @pages %>
   <% end %>
 </div>

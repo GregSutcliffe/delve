@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.1.rc1'
 gem 'sane-ffi'
-gem 'rmagick'
+gem 'rmagick', '2.13.2'
 gem 'bootstrap-sass'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
