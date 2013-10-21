@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   belongs_to :document
   validates :path, presence: true, uniqueness: true
   scope :without_document, -> { where(document_id: nil) }
-  default_scope -> { order('created_at DESC') }
+  default_scope -> { order('created_at ASC') }
 
   private
 
