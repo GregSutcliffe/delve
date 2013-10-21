@@ -42,7 +42,7 @@ describe Document do
     end
 
     it "should have the right pages in the right order" do
-      expect(@doc.pages.to_a).to eq [newer_page, older_page]
+      expect(@doc.pages.to_a).to eq [older_page, newer_page]
     end
 
     it "should be able to associate from an ID array" do

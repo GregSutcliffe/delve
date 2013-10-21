@@ -9,7 +9,6 @@ class Scanner < ActiveRecord::Base
   validates :device_url, presence: true, uniqueness: true
 
   def acquire
-    puts "called"
     # Use timestamp until we can think of something better
     if page = get_image
       file = File.basename(page.filename)
