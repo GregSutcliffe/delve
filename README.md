@@ -4,46 +4,12 @@
 No more delving into boxes full of paper! Delve is strongly inspired/influenced
 by [OpenDIAS](http://opendias.essentialcollections.co.uk).
 
-Delve is under initial development, and can't do very much yet, but you can view the
-TODO section for some of the things we have planned.
+Delve is under initial development, but its core functionality of scanning,
+storing and later finding documents works. You can view the Issues for some of
+the things we have planned.
 
-# TODO
-
-## Needs tests
-
-* models for Page and Scanner
-* find and scan from local scanner
-* display stored images
-
-## Short term goals
-
-* Make it look better
-* Add settings system
-  * Global
-    1. Scans location
-    2. Default Scanner
-  * Per-Scanner
-    1. Scan Resolution
-    2. Greyscale vs colour
-* Quick Acquire via default scanner
-
-## Longer term
-
-* Import from image
-* import from pdf
-* Rotate images
-* OCR images
-
-* Model for Document
-  * Associate Pages into Documents
-* Re-perform OCR on an image
-* Search forms
-* Tags
-* Image hashing with PHash
-
-## Nice-to-have
-
-* Export image+text as hidden-text embedded PDF
+Head over to the [wiki](https://github.com/GregSutcliffe/delve/wiki) for
+instrusctions on how to get started!
 
 # Copyright
 
