@@ -3,7 +3,7 @@ Delve::Application.routes.draw do
   match '/help',     to: 'static_pages#help',    via: 'get'
   match '/about',    to: 'static_pages#about',   via: 'get'
   match '/contact',  to: 'static_pages#contact', via: 'get'
-  match '/scan_now', to: 'scanners#scan_now', via: 'get'
+  match '/scan_now', to: 'scanners#scan_now',    via: 'get'
 
   get "static_pages/home"
 
@@ -14,6 +14,8 @@ Delve::Application.routes.draw do
   end
 
   resources :pages
+  match '/upload', to: 'pages#upload',      via: 'get'
+  match '/upload', to: 'pages#file_upload', via: 'post'
   resources :documents
 
   get 'tags/:tag', to: 'documents#index', as: :tag

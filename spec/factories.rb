@@ -7,6 +7,12 @@ FactoryGirl.define do
   factory :page do
     sequence(:path) { |n| "path_#{n}.jpg"}
     document
+
+    trait :unassociated do
+      before :create do |page|
+        page.document_id = nil
+      end
+    end
   end
 
   factory :scanner do

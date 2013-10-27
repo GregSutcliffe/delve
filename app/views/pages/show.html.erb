@@ -6,7 +6,7 @@
   </tr>
   <tr>
     <td><%= @page.path %></td>
-    <td><%= link_to(@page.document.name, document_path(@page.document)) %></td>
+    <td><%= link_to(@page.document.name, document_path(@page.document)) if @page.document %></td>
   </tr>
 </table>
 </p>

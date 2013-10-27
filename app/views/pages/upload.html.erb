@@ -1,0 +1,7 @@
+<% provide(:title, 'Upload File') %>
+<h2>Upload a Page below</h2>
+<p>It will be added to the list of unassociated Pages. Uploading whole Documents is coming!</p>
+<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :file %>
+  <%= f.submit "Upload" %>
+<% end %>
