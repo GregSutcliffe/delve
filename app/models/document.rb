@@ -28,7 +28,9 @@ class Document < ActiveRecord::Base
 
     # create pages
     pdf_pages = []
-    images = Magick::ImageList.new(location)
+    images = Magick::ImageList.new(location) do
+      self['density'] = '300' # use 30 DPI for pdf conversion, same as for scanning
+    end
     images.each do |image|
       name     = Time.now.strftime(DATE_FORMAT) + ".jpg"
       location = File.join(STORAGE_DIR,name)
