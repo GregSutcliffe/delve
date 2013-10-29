@@ -1,8 +1,13 @@
 # Delve
 
+> delve /dɛlv/  
+> verb  
+> * reach inside a receptacle and search for something.  
+> `'she delved in her pocket'`  
+> *synonyms*: rummage (about/around/round) in, search (through), root about/around in
+
 **Delve** is a Ruby-on-Rails webapp that aims to help you manage you documents.
-No more delving into boxes full of paper! Delve is strongly inspired/influenced
-by [OpenDIAS](http://opendias.essentialcollections.co.uk).
+No more delving into boxes full of unsorted paperwork! Delve will help you to scan, tag, index and retrieve documents to save you precious time when you're in a hurry.
 
 Delve is under initial development, but its core functionality of scanning,
 storing and later finding documents works. You can view the Issues for some of
@@ -10,6 +15,12 @@ the things we have planned.
 
 Head over to the [wiki](https://github.com/GregSutcliffe/delve/wiki) for
 instrusctions on how to get started!
+
+# History
+
+Delve is strongly inspired/influenced
+by [OpenDIAS](http://opendias.essentialcollections.co.uk) and many of
+it's features are present in Delve.
 
 # Copyright
 
