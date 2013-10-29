@@ -28,7 +28,7 @@ class Document < ActiveRecord::Base
 
     # create pages
     pdf_pages = []
-    images = Magick::ImageList.new(path_to_file)
+    images = Magick::ImageList.new(location)
     images.each do |image|
       name     = Time.now.strftime(DATE_FORMAT) + ".jpg"
       location = File.join(STORAGE_DIR,name)

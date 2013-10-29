@@ -75,6 +75,8 @@ describe Document do
     let(:doc) { FactoryGirl.create(:document, :name => "PDF Test") }
 
     it "should create doc with pages and a pdf link" do
+      imagelist=Magick::ImageList.new(file)
+      Magick::ImageList.stub(:new) {imagelist}
       doc.index_pdf! file
       doc.reload
       doc.pdf_path.should eq("pdf/#{doc.id}_PDF_Test.pdf")
