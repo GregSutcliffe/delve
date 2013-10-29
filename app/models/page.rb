@@ -1,9 +1,11 @@
 class Page < ActiveRecord::Base
 
-  STORAGE_DIR = ::Rails.root.join('public','scans')
-  DATE_FORMAT = '%F_%H-%M-%S'
+  include FileCleanup
 
-  before_destroy :ensure_file_deleted
+  STORAGE_DIR = ::Rails.root.join('public','scans')
+  DATE_FORMAT = '%F_%H-%M-%S.%L'
+
+  before_destroy { |p| p.ensure_file_deleted path }
 
   belongs_to :document
   validates :path, presence: true, uniqueness: true
@@ -11,19 +13,6 @@ class Page < ActiveRecord::Base
   default_scope -> { order('created_at ASC') }
 
   private
-
-  def ensure_file_deleted
-    File.unlink(File.join(STORAGE_DIR,path))
-  rescue Errno::ENOENT
-    # already deleted
-    true
-  rescue Exception => e
-    errors.add :base, "Cannot remove file: #{e.message}"
-    Rails.logger.warn e.class
-    Rails.logger.warn e.message
-    Rails.logger.warn e.backtrace
-    false
-  end
 
   def self.file_upload_jpeg name,path_to_file
     name = Time.now.strftime(DATE_FORMAT) + ".jpg"

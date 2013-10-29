@@ -61,7 +61,7 @@ describe Page do
     it "should create page with jpg attributes" do
       FileUtils.stub(:cp) {true}
       page = Page.file_upload_jpeg('test.jpg',file)
-      page.path.should eq('2013-01-01_00-00-00.jpg')
+      page.path.should eq('2013-01-01_00-00-00.000.jpg')
       page.errors.should be_empty
     end
   end

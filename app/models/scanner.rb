@@ -3,7 +3,7 @@ require 'RMagick'
 class Scanner < ActiveRecord::Base
 
   STORAGE_DIR = ::Rails.root.join('public','scans')
-  DATE_FORMAT = '%F_%H-%M-%S'
+  DATE_FORMAT = '%F_%H-%M-%S.%L'
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :device_url, presence: true, uniqueness: true

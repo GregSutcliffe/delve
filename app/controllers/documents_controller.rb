@@ -20,6 +20,12 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
+      if params[:document] && params[:document][:file]
+        if params[:document][:file].content_type == 'application/pdf'
+          @document.index_pdf! params[:document][:file].tempfile
+        end
+      end
+
       flash[:success] = "Document created!"
       redirect_to @document
     else

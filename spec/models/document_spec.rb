@@ -60,4 +60,30 @@ describe Document do
     end
   end
 
+  describe "pdf uploads" do
+    before do
+      Timecop.freeze(Time.local(2013))
+      FileUtils.stub(:cp) {true}
+      Magick::Image.any_instance.stub(:write) {true}
+    end
+
+    after do
+      Timecop.return
+    end
+
+    let(:file) { File.expand_path(File.dirname(__FILE__) + '../../fixtures/test.pdf') }
+    let(:doc) { FactoryGirl.create(:document, :name => "PDF Test") }
+
+    it "should create doc with pages and a pdf link" do
+      doc.index_pdf! file
+      doc.reload
+      doc.pdf_path.should eq("pdf/#{doc.id}_PDF_Test.pdf")
+      doc.pages.size.should eq(1)
+      doc.should be_valid
+    end
+  end
+#          saved=Document.find_by_name(doc.name)
+#          saved.pages.size.should eq(1)
+#          saved.pdf_path.should eq('pdf/211_PDF_Test.pdf')
+
 end

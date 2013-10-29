@@ -4,7 +4,9 @@
     <%= @document.name %>
   </h1>
 </div>
+
 <br/>
+
 <div class="right">
   <% if @document.location.blank? %>
     <p>Location: <span class="btn" disabled="disabled">No hardcopy kept</span></p>
@@ -12,7 +14,14 @@
     <p>Location: <span class="btn" disabled="disabled"><%= @document.location %></span></p>
   <% end %>
   <%= link_to 'Edit', edit_document_path(@document), class: "right btn btn-success" %>
+  <% if @document.pdf_path %>
+    <%= link_to "Original PDF", image_path("/scans/#{@document.pdf_path}"),
+    :class => "btn", :target => "_blank" %>
+  <% end %>
+  <%= link_to 'Delete', document_path(@document), class: "btn btn-small btn-danger",
+    method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </div>
+
 <div class="left">
   <p>
     Tags: <%= raw @document.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>

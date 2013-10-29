@@ -89,6 +89,19 @@ describe "DocumentPages" do
         it { should have_title(document.name) }
         it { should have_selector('div.alert.alert-success', text: 'Document created') }
       end
+
+      describe "with a pdf selected" do
+        let(:file) { fixture_file_upload('/test.pdf', 'application/pdf') }
+
+        it "a good file should upload" do
+          Document.any_instance.should_receive(:index_pdf!).once.and_return(true)
+          post documents_path, :document => { :name => "Test PDF", :file => file  }
+          flash[:error].should be_nil
+          flash[:success].should eq('Document created!')
+          response.status.should eq(302)
+        end
+
+      end
     end
   end
 

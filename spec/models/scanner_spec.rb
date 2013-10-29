@@ -36,13 +36,15 @@ describe Scanner do
     it "stores the image correctly" do
       test_image = Magick::Image.new(256,256)
       test_image.stub(:properties) {{'date:create'=>Time.new('2013','09','12')}}
+      test_image.stub(:filename) {'2013-09-12_00-00-00.000.jpg'}
+      test_image.stub(:write) {test_image}
 
       Magick::Image.should_receive(:from_blob).once.with("data\n").and_return(stub(:first => test_image))
       @scanner.should_receive(:`).once.with("scanimage -d #{@scanner.device_url}").and_return(`echo data`)
 
       page = @scanner.acquire
       expect(page).to be_valid
-      expect(page.path).to eq('2013-09-12_00-00-00.jpg')
+      expect(page.path).to eq('2013-09-12_00-00-00.000.jpg')
     end
     
     it "returns false for acquire when get_image cannot be acquired" do
