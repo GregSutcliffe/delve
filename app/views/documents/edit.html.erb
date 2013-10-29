@@ -1,35 +1,4 @@
 <% provide(:title, "Edit document") %>
 <h1>Update your document</h1>
-<div id="tag_cloud">
-  <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
-  <% end %>
-</div>
 
-<br/>
-
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@document) do |f| %>
-      <%= render 'shared/error_messages' %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-
-      <%= f.label :tag_list, "Tags (separated by commas)" %>
-      <%= f.text_field :tag_list %>
-
-      <% @selected_pages = @document.pages.map {|p| p.id} if @document.pages %>
-      <%= f.label :pages %>
-      <%= select_tag 'document[form_pages][]', options_for_select(
-        (Page.without_document + @document.pages).map {|p| [p.path,p.id]}, @selected_pages),
-        { :multiple => true } %>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-  </div>
-</div>
+<%= render :partial => 'form' %>

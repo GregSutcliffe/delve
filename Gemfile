@@ -1,18 +1,20 @@
 source 'https://rubygems.org'
 
+# Rails / JS / CSS stuff
 gem 'rails', '4.0.1.rc1'
-
-gem 'sane-ffi'
-gem 'rmagick', '2.13.2'
-
 gem 'bootstrap-sass'
 gem "twitter-bootstrap-rails"
-
+gem 'bootstrap-datepicker-rails'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
+# Core functionality
+
+gem 'sane-ffi'
+gem 'rmagick', '2.13.2'
 gem 'acts-as-taggable-on'
 
+# DB for everyone
 gem 'sqlite3', '1.3.8'
 
 group :development, :test do

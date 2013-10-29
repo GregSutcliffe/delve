@@ -58,7 +58,12 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:name, :location, :tag_list, form_pages: [])
+    params.require(:document).permit(:name,
+                                     :location,
+                                     :tag_list,
+                                     :relevant_date,
+                                     form_pages: []
+                                    )
   end
 
 end

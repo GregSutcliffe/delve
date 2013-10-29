@@ -20,7 +20,7 @@
     <th>Name</th>
     <th>Pages</th>
     <th>Location</th>
-    <th>Created</th>
+    <th>Date</th>
     <th>Actions</th>
   </tr>
 
@@ -29,7 +29,7 @@
       <td><%= link_to doc.name, document_path(doc) %></td>
       <td><%= doc.pages.count %></td>
       <td><%= doc.location %></td>
-      <td><%= doc.created_at.to_date %></td>
+      <td><%= doc.relevant_date.to_date rescue "" %></td>
       <td><%= link_to 'Edit', edit_document_path(doc), class: "btn btn-small" %>
           <%= link_to 'Delete', document_path(doc), class: "btn btn-small btn-danger",
               method: :delete, data: { confirm: 'Are you sure?' } %></td>

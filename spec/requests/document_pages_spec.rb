@@ -135,7 +135,7 @@ describe "DocumentPages" do
       before do
         FactoryGirl.create(:document,:name => "test1")
         fill_in "Name", with: "test1"
-        click_button "Save changes"
+        click_button "Save Changes"
       end
 
       it { should have_content('error') }
@@ -147,7 +147,7 @@ describe "DocumentPages" do
       before do
         fill_in "Name",             with: new_name
         fill_in "Location",         with: new_location
-        click_button "Save changes"
+        click_button "Save Changes"
       end
 
       it { should have_title(new_name) }

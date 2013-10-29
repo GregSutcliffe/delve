@@ -1,0 +1,68 @@
+<div id="tag_cloud">
+  <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+<% end %>
+</div>
+
+<br/>
+
+<div class="row">
+  <div class="span12">
+    <%= form_for @document, :html => {:multipart => true} do |f| %>
+      <%= render 'shared/error_messages' %>
+
+    <div class="row">
+      <div class="span6">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="span5 offset1">
+        <%= f.label :location %>
+        <%= f.text_field :location %>
+      </div>
+      <div class="span6">
+        <%= f.label :tag_list, "Tags (separated by commas)" %>
+        <%= f.text_field :tag_list %>
+      </div>
+      <div class="span5 offset1">
+        <%= f.label :relevant_date %>
+        <%#= f.input :relevant_date, as: :bootstrap_datepicker %>
+        <input type="text" name="document[relevant_date]" data-behaviour='datepicker' >
+
+        <script type="text/javascript">
+  $(document).ready(function(){
+      $('[data-behaviour~=datepicker]').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true
+            });
+            })
+        </script>
+
+      </div>
+    </div>
+    <br />
+    <div class="tabbable">
+      <ul class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#images" data-toggle="tab">Select Pages</a></li>
+        <li><a href="#pdf" data-toggle="tab">Upload PDF</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="images">
+          <% @selected_pages = @document.pages.map {|p| p.id} if @document.pages %>
+          <%= f.label :pages %>
+          <%= select_tag 'document[form_pages][]', options_for_select(
+            (Page.without_document + @document.pages).map {|p| [p.path,p.id]}, @selected_pages),
+            { :multiple => true } %>
+        </div>
+        <div class="tab-pane" id="pdf">
+          <p>This will be split into individual pages, and each page turned into a JPEG for
+          viewing within Delve.<br/> The original PDF will be stored and offered for re-download</p>
+          <%= f.file_field :file %>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit create_or_update_doc, class: "btn btn-large btn-primary" %>
+  <% end %>
+  </div>
+</div>
