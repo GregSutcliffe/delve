@@ -2,9 +2,6 @@ class Page < ActiveRecord::Base
 
   include FileCleanup
 
-  STORAGE_DIR = ::Rails.root.join('public','scans')
-  DATE_FORMAT = '%F_%H-%M-%S.%L'
-
   before_destroy { |p| p.ensure_file_deleted path }
 
   belongs_to :document

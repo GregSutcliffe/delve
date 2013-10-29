@@ -31,8 +31,6 @@ describe Page do
     before { @page.path = 'test' }
 
     it 'should delete the associated file' do
-      STORAGE_DIR = ::Rails.root.join('public','scans')
-
       File.write(File.join(STORAGE_DIR,'test'),'foo')
       File.exist?(File.join(STORAGE_DIR,'test')).should be_true
 

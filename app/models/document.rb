@@ -1,11 +1,7 @@
-require 'RMagick'
 
 class Document < ActiveRecord::Base
 
   include FileCleanup
-
-  STORAGE_DIR = ::Rails.root.join('public','scans')
-  DATE_FORMAT = '%F_%H-%M-%S.%L'
 
   has_many :pages, dependent: :destroy
   before_destroy { |d| d.ensure_file_deleted pdf_path }
