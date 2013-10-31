@@ -15,6 +15,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
+    @document.relevant_date = Date.today
   end
 
   def create

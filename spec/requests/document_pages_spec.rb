@@ -78,6 +78,8 @@ describe "DocumentPages" do
         fill_in "Location",     with: "In My Hand"
       end
 
+      it { should have_field("Relevant date", :with => Date.today.to_s) }
+
       it "should create a document" do
         expect { click_button submit }.to change(Document, :count).by(1)
       end
@@ -129,6 +131,7 @@ describe "DocumentPages" do
     describe "page" do
       it { should have_content("Update your document") }
       it { should have_title("Edit document") }
+      it { should have_field("Relevant date", :with => doc.relevant_date.to_s) }
     end
 
     describe "with invalid information" do

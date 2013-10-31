@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :document do
     sequence(:name)     { |n| "Document #{n}" }
     sequence(:location) { |n| "Location #{n}"}
+    sequence(:relevant_date) { |n| Date.new(2012,12,31) + n.days }
   end
 
   factory :page do
