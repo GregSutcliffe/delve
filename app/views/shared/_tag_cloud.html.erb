@@ -1,0 +1,12 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <th align="right"><%= 'Tag Cloud' %></th>
+  </tr>
+  <tr>
+    <td>
+      <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
+        <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+      <% end %>
+    </td>
+  </tr>
+</table>

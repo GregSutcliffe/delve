@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Rails / JS / CSS stuff
 gem 'rails', '4.0.1.rc1'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '<3.0'
 gem "twitter-bootstrap-rails"
 gem 'bootstrap-datepicker-rails'
 gem 'will_paginate', '3.0.4'
