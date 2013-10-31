@@ -92,18 +92,6 @@ describe "DocumentPages" do
         it { should have_selector('div.alert.alert-success', text: 'Document created') }
       end
 
-      describe "with a pdf selected" do
-        let(:file) { fixture_file_upload('/test.pdf', 'application/pdf') }
-
-        it "a good file should upload" do
-          Document.any_instance.should_receive(:index_pdf!).once.and_return(true)
-          post documents_path, :document => { :name => "Test PDF", :file => file  }
-          flash[:error].should be_nil
-          flash[:success].should eq('Document created!')
-          response.status.should eq(302)
-        end
-
-      end
     end
   end
 
@@ -118,9 +106,60 @@ describe "DocumentPages" do
     it { should have_title(doc.name) }
 
     describe "pages" do
-      it { should have_link('View fullsize', href: "/scans/#{p1.path}") }
-      it { should have_link('View fullsize', href: "/scans/#{p2.path}") }
       it { should have_content(doc.pages.count) }
+    end
+
+    describe "scanning" do
+      before { FactoryGirl.create(:scanner) }
+
+      it { should have_link('Scan New Page', href: scan_document_path(doc)) }
+
+      it "should scan a page" do
+        Scanner.any_instance.should_receive(:acquire).once.and_return(FactoryGirl.build(:page, :unassociated))
+        expect { visit scan_document_path(doc) }.to change(doc.pages, :count).by(1)
+      end
+    end
+
+    describe "uploads" do
+      it { should have_selector("input[type=submit][value='Upload']") }
+      it { should have_selector("input[type=file][name='document[image]']") }
+
+      describe "with no upload selected" do
+        before { click_button "Upload" }
+
+        it { should have_title(doc.name) }
+        it { should have_selector('div.alert.alert-error', text: 'No file selected') }
+      end
+
+      let(:jpeg) { fixture_file_upload('/test.jpg', 'image/jpeg') }
+      let(:pdf) { fixture_file_upload('/test.pdf', 'application/pdf') }
+      let(:png) { fixture_file_upload('/test.png', 'image/png') }
+
+      it "should upload a jpeg" do
+        Document.any_instance.should_receive(:file_upload_jpeg).once.and_return(FactoryGirl.create :page, :unassociated)
+        patch upload_document_path(doc), :document => { :image => jpeg  }
+        flash[:error].should be_nil
+        flash[:success].should eq("test.jpg appended to #{doc.name}")
+        response.status.should eq(302)
+      end
+
+
+      it "should upload a pdf" do
+        Document.any_instance.should_receive(:index_pdf!).once.and_return(true)
+        patch upload_document_path(doc), :document => { :image => pdf  }
+        flash[:error].should be_nil
+        flash[:success].should eq("test.pdf appended to #{doc.name}")
+        response.status.should eq(302)
+      end
+
+
+      it "should not upload unsupported formats" do
+        patch upload_document_path(doc), :document => { :image => png  }
+        flash[:success].should be_nil
+        flash[:error].should eq("Error!\nFormat PNG is not implemented yet")
+        response.status.should eq(302)
+      end
+
     end
   end
 

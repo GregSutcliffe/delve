@@ -1,4 +1,12 @@
 <% provide(:title, "Edit document") %>
-<h1>Update your document</h1>
+<div id="title" class="row">
+  <div class="span8">
+    <h1>Update your document</h1>
+  </div>
+  <div id="tag_cloud" class="span4">
+    <%= render :partial => 'shared/tag_cloud' %>
+  </div>
+</div>
+
 
 <%= render :partial => 'form' %>

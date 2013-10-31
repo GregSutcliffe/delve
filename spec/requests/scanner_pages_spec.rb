@@ -13,20 +13,6 @@ describe "Scanner pages" do
     it { should have_title('Scanners') }
     it { should have_content('All Scanners') }
 
-    describe "pagination" do
-
-      before(:all) { 30.times { FactoryGirl.create(:scanner) } }
-      after(:all)  { Scanner.delete_all }
-
-      it { should have_selector('div.pagination') }
-
-      it "should list each scanner" do
-        Scanner.paginate(page: 1).each do |scanner|
-          expect(page).to have_selector('td', text: scanner.name)
-        end
-      end
-    end
-
     describe "delete links" do
 
       it { should have_link('Delete', href: scanner_path(Scanner.first)) }

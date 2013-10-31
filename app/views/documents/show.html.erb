@@ -1,3 +1,4 @@
+<% javascript_tag 'documents' %>
 <% provide(:title, @document.name) %>
 
 <div id="title" class="row">
@@ -25,25 +26,34 @@
 </div>
 
 <div class="row">
-  <div id="doc_info" class="span12 btn-toolbar la">
+  <div id="doc_info" class="span10 btn-toolbar la">
     <div class="btn-group left">
       <%= document_info_buttons @document %>
     </div>
     <div class="btn-group">
       <%= document_page_buttons @document %>
     </div>
-    <div class="btn-group right">
+  </div>
+  <div id="doc_info" class="span2 btn-toolbar ra">
+    <div class="btn-group ra">
       <%= document_edit_buttons @document %>
     </div>
+  </div>
+  <div class="form offset3" id="pdf">
+    <%= form_for @document, :html => {:multipart => true}, :url => { :action => :upload } do |f| %>
+      <div class="form-group" id="upload">
+        <%= f.file_field :image %>
+        <%= f.submit "Upload" %>
+      </div>
+    <% end %>
   </div>
 </div>
 
 <div class="pages">
   <% if @document.pages.any? %>
     <h1>Pages (<%= @document.pages.count %>)</h1>
-  <ul class="pages">
-    <%= render @pages %>
-  </ul>
-  <%= will_paginate @pages %>
-<% end %>
+    <ul class="thumbnails">
+      <%= render @pages %>
+    </ul>
+  <% end %>
 </div>

@@ -60,7 +60,7 @@ describe Document do
     end
   end
 
-  describe "pdf uploads" do
+  describe "uploads" do
     before do
       Timecop.freeze(Time.local(2013))
       FileUtils.stub(:cp) {true}
@@ -71,21 +71,29 @@ describe Document do
       Timecop.return
     end
 
+    let(:jpeg) { File.expand_path(File.dirname(__FILE__) + '../../fixtures/test.jpg') }
     let(:file) { File.expand_path(File.dirname(__FILE__) + '../../fixtures/test.pdf') }
-    let(:doc) { FactoryGirl.create(:document, :name => "PDF Test") }
+    let(:doc) { FactoryGirl.create(:document, :name => "UploadTest") }
 
     it "should create doc with pages and a pdf link" do
       imagelist=Magick::ImageList.new(file)
       Magick::ImageList.stub(:new) {imagelist}
       doc.index_pdf! file
       doc.reload
-      doc.pdf_path.should eq("pdf/#{doc.id}_PDF_Test.pdf")
+      doc.pdf_path.should eq("pdf/#{doc.id}_UploadTest.pdf")
       doc.pages.size.should eq(1)
       doc.should be_valid
     end
+
+    it "should create page with jpg attributes" do
+      FileUtils.stub(:cp) {true}
+      page = doc.file_upload_jpeg(jpeg)
+      page.document = doc
+      page.save
+      doc.reload
+      doc.pages.first.path.should eq('2013-01-01_00-00-00.000.jpg')
+      doc.errors.should be_empty
+    end
   end
-#          saved=Document.find_by_name(doc.name)
-#          saved.pages.size.should eq(1)
-#          saved.pdf_path.should eq('pdf/211_PDF_Test.pdf')
 
 end

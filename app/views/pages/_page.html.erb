@@ -1,5 +1,13 @@
-<li>
-  <%= image_tag "/scans/#{page.path}", size: '200x200' %>
-<br/>
-  <%= link_to "View fullsize", image_path("/scans/#{page.path}"), :target => "_blank" %>
+<li class="span4">
+  <div class="thumbnail">
+    <%= link_to (image_tag "/scans/#{page.path}"),
+                 image_path("/scans/#{page.path}"),
+                 :target => "_blank" %>
+  </div>
+  <div class="caption">
+    <div class="btn-group left">
+      <%= link_to 'Delete', page_path(page), class: "btn btn-small btn-danger",
+        method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </div>
+  </div>
 </li>

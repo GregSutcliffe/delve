@@ -21,12 +21,6 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
-      if params[:document] && params[:document][:file]
-        if params[:document][:file].content_type == 'application/pdf'
-          @document.index_pdf! params[:document][:file].tempfile
-        end
-      end
-
       flash[:success] = "Document created!"
       redirect_to @document
     else
@@ -56,6 +50,37 @@ class DocumentsController < ApplicationController
     redirect_to documents_path
   end
 
+  def upload
+    @document = Document.find(params[:id])
+    if params[:document] && params[:document][:image]
+      if file_upload params[:document][:image]
+        redirect_to @document, flash: { :success => "#{params[:document][:image].original_filename} appended to #{@document.name}" }
+      else
+        redirect_to @document, flash: { :error => "Error!\n" + @document.errors.full_messages.join("\n") }
+      end
+    else
+      redirect_to @document,flash: { :error => "No file selected!" }
+    end
+  end
+
+  def scan
+    @document = Document.find(params[:id])
+    # Make this a drop-down of all scanners
+    @scanner = Scanner.first
+    page = @scanner.acquire
+    if page && page.errors.empty?
+      page.document = @document
+      if page.save
+        flash[:success] = "Page added to #{@document.name}"
+      else
+        flash[:error] = "Page scanned but failed to add to #{@document.name}\n" + page.errors.full_messages.join("\n")
+      end
+    else
+      flash[:error] = "Failed to scan!\n" + @document.errors.full_messages.join("\n") 
+    end
+    redirect_to @document
+  end
+
   private
 
   def document_params
@@ -65,6 +90,16 @@ class DocumentsController < ApplicationController
                                      :relevant_date,
                                      form_pages: []
                                     )
+  end
+
+  def file_upload file
+    if file.content_type == 'application/pdf'
+      @document.index_pdf! file.tempfile
+    else
+      type = file.content_type.split('/').last
+      @document.send("file_upload_#{type}".to_sym, file.tempfile)
+    end
+    @document.errors.empty?
   end
 
 end

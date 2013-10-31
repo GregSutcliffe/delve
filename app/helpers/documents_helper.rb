@@ -5,7 +5,9 @@ module DocumentsHelper
 
   def document_info_buttons doc
     date_string = doc.relevant_date.blank? ? "No date set" : doc.relevant_date
-    content_tag(:button, date_string, :class => "btn btn-default", :disabled => true)
+    location_string = "Location: #{doc.location.blank? ? "No hardcopy" : doc.location }"
+    content_tag(:button, date_string, :class => "btn btn-default", :disabled => true) +
+    link_to(location_string, '#', :class => "btn btn-default", :disabled => doc.location.blank?)
   end
 
   def document_edit_buttons doc
@@ -15,9 +17,8 @@ module DocumentsHelper
   end
 
   def document_page_buttons doc
-    location_string = "Location: #{doc.location.blank? ? "No hardcopy" : doc.location }"
-    link_to(location_string, '#', :class => "btn btn-default", :disabled => doc.location.blank?) +
-
+    link_to("Scan New Page", scan_document_path(doc), :class => "btn btn-default" ) +
+    link_to("Upload JPEG/PDF", '#', :class => "btn btn-default", :onclick => 'upload()' ) +
     link_to("Download Original PDF", image_path("/scans/#{doc.pdf_path}"),
               :class => "btn", :target => "_blank", :disabled => doc.pdf_path.blank?)
   end

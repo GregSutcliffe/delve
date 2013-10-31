@@ -1,4 +1,11 @@
 <% provide(:title, 'New Document') %>
-<h1>New Document</h1>
+<div id="title" class="row">
+  <div class="span8">
+    <h1>New Document</h1>
+  </div>
+  <div id="tag_cloud" class="span4">
+    <%= render :partial => 'shared/tag_cloud' %>
+  </div>
+</div>
 
 <%= render :partial => 'form' %>

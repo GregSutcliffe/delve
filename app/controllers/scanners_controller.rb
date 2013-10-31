@@ -45,21 +45,13 @@ class ScannersController < ApplicationController
 
   def acquire
     @scanner = Scanner.find(params[:id])
-    if @scanner.acquire
+    page = @scanner.acquire
+    if page && page.save
       flash[:success] = "Page acquired!"
     else
       flash[:error] = "Page failed to acquire!"
     end
     redirect_to @scanner
-  end
-
-  def scan_now
-    @scanner = Scanner.first
-    if @scanner
-      redirect_to acquire_scanner_path(@scanner)
-    else
-      redirect_to :new_scanner
-    end
   end
 
   private

@@ -38,8 +38,16 @@ class Document < ActiveRecord::Base
       pdf_pages << Page.create(:path => name)
     end
 
-    self.pages = pdf_pages
+    self.pages << pdf_pages
     self.save
+  end
+
+  # refactor this with the pdf image save block on line 34
+  def file_upload_jpeg path_to_file
+    name = Time.now.strftime(DATE_FORMAT) + ".jpg"
+    location = File.join(STORAGE_DIR,name)
+    FileUtils.cp path_to_file, location
+    Page.create(:path => name, :document => self )
   end
 
   private
@@ -53,5 +61,17 @@ class Document < ActiveRecord::Base
     filename.gsub!(/[^0-9A-Za-z.\-]/, '_')
     filename
   end
+
+  def method_missing(method, *args, &block)
+    case method.to_s
+    when /file_upload/
+      Rails.logger.info "Support for #{method.to_s} not implemented yet"
+      self.errors.add :format, "#{method.to_s.gsub(/file_upload_/,'').upcase} is not implemented yet"
+      self
+    else
+      super
+    end
+  end
+
 
 end

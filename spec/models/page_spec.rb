@@ -45,23 +45,4 @@ describe Page do
 
   end
 
-  describe "jpg uploads" do
-    before do
-      Timecop.freeze(Time.local(2013))
-    end
-
-    after do
-      Timecop.return
-    end
-
-    let(:file) { File.expand_path(File.dirname(__FILE__) + '../../fixtures/test.jpg') }
-
-    it "should create page with jpg attributes" do
-      FileUtils.stub(:cp) {true}
-      page = Page.file_upload_jpeg('test.jpg',file)
-      page.path.should eq('2013-01-01_00-00-00.000.jpg')
-      page.errors.should be_empty
-    end
-  end
-
 end

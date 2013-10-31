@@ -1,24 +1,26 @@
 <% provide(:title, 'Documents') %>
-<h1>All Documents</h1>
 
-<div class="right">
-  <%= link_to "New Document", new_document_path, class: "btn btn-success" %>
+<div id="title" class="row">
+  <div class="span8">
+    <h1>All Documents</h1>
+    <%= link_to "New Document", new_document_path, class: "btn btn-success" %>
+  </div>
+  <div id="tag_cloud" class="span4">
+    <%= render :partial => 'shared/tag_cloud' %>
+  </div>
 </div>
 
-<div id="tag_cloud">
-  <% tag_cloud(Document.tag_counts.sort {|a,b| a.name <=> b.name }, %w(s m l)) do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
-  <% end %>
+<div class="row">
+  <div id="doc_info" class="span2 offset10 btn-toolbar ra">
+    <div class="btn-group right">
 </div>
-
-<br/>
+</div>
 
 <%= will_paginate %>
 
-<table class="table">
+<table class="table table-bordered table-striped table-condensed">
   <tr>
     <th>Name</th>
-    <th>Pages</th>
     <th>Location</th>
     <th>Date</th>
     <th>Actions</th>
@@ -27,7 +29,6 @@
   <% @documents.each do |doc| %>
     <tr>
       <td><%= link_to doc.name, document_path(doc) %></td>
-      <td><%= doc.pages.count %></td>
       <td><%= doc.location %></td>
       <td><%= doc.relevant_date.to_date rescue "" %></td>
       <td><%= link_to 'Edit', edit_document_path(doc), class: "btn btn-small" %>

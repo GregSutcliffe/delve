@@ -7,7 +7,7 @@ class Scanner < ActiveRecord::Base
     # Use timestamp until we can think of something better
     if page = get_image
       file = File.basename(page.filename)
-      return Page.create(:path => file)
+      return Page.new(:path => file)
     end
     return false
   end

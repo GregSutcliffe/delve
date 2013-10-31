@@ -17,16 +17,20 @@ describe 'Static pages' do
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
 
+  end
+
+  describe "scan now button" do
     it 'should direct scan-now to new scanner when no scanners exist' do
       Scanner.all.each { |s| s.destroy }
+      visit root_path #reload the button
       click_link 'Scan something now!'
       expect(page).to have_title(full_title('New Scanner'))
     end
-    it 'should direct scan-now to acquire on first scanner' do
+    it 'should direct scan-now to new document when scanners exist ' do
       Scanner.create(name: "Example Scanner", device_url: "net://host/path")
-      Scanner.any_instance.should_receive(:acquire).and_return(true)
+      visit root_path #reload the button
       click_link 'Scan something now!'
-      expect(page).to have_content('Example Scanner')
+      expect(page).to have_title(full_title('New Document'))
     end
   end
 
@@ -69,8 +73,6 @@ describe 'Static pages' do
     expect(page).to have_title(full_title('Pages'))
     click_link 'Documents'
     expect(page).to have_title(full_title('Documents'))
-    click_link 'Upload File'
-    expect(page).to have_title(full_title('Upload File'))
     click_link 'Delve'
     expect(page).to have_title(full_title(''))
   end
