@@ -1,16 +1,25 @@
 class DocumentsController < ApplicationController
 
+  def index (title = nil)
+  end
+
   def index
-    if params[:tag]
-      @documents = Document.tagged_with(params[:tag]).paginate(page: params[:page])
-    else
-      @documents = Document.paginate(page: params[:page])
+    begin
+      if params[:tag]
+        search = Document.tagged_with(params[:tag])
+      else
+        search = Document.search_for(params[:search],:order => params[:order])
+      end
+    rescue => e
+      flash[:error] = e.to_s
+      search = Document.search_for ''
     end
+    @documents = search.paginate(page: params[:page])
   end
 
   def show
     @document = Document.find(params[:id])
-    @pages = @document.pages.paginate(page: params[:page])
+    @pages = @document.pages
   end
 
   def new
@@ -76,7 +85,7 @@ class DocumentsController < ApplicationController
         flash[:error] = "Page scanned but failed to add to #{@document.name}\n" + page.errors.full_messages.join("\n")
       end
     else
-      flash[:error] = "Failed to scan!\n" + @document.errors.full_messages.join("\n") 
+      flash[:error] = "Failed to scan!\n" + @document.errors.full_messages.join("\n")
     end
     redirect_to @document
   end

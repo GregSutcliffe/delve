@@ -6,11 +6,13 @@ class Document < ActiveRecord::Base
   has_many :pages, dependent: :destroy
   before_destroy { |d| d.ensure_file_deleted pdf_path }
   acts_as_taggable
+  scoped_search :on => [:name, :location]
+  scoped_search :on => :relevant_date, :aliases => [:date]
+
 
   validates :name, presence: true, uniqueness: true
   # Don't have to set a pdf_path, but it must be unique if it is set.
   validates :pdf_path, uniqueness: true, allow_nil: true, allow_blank: true
-
 
   default_scope -> { order('created_at DESC') }
 
@@ -29,7 +31,7 @@ class Document < ActiveRecord::Base
     # create pages
     pdf_pages = []
     images = Magick::ImageList.new(location) do
-      self['density'] = '300' # use 30 DPI for pdf conversion, same as for scanning
+      self['density'] = '300' # use 300 DPI for pdf conversion, same as for scanning
     end
     images.each do |image|
       name     = Time.now.strftime(DATE_FORMAT) + ".jpg"

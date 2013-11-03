@@ -3,7 +3,16 @@
     <div class="container">
       <%= link_to image_tag("delve.svg", :size => "26x26", class: "brand", :alt => "Delve-img"), root_path %>
       <%= link_to "Delve", root_path, id: "logo", class: "brand" %>
+
+
       <nav>
+      <%= form_tag send("documents_path"), :method => "get", :class=>"form-search navbar-search" do %>
+        <div class="input-append">
+        <%= text_field_tag(:search, params[:search].try(:squeeze," "), :placeholder => "Search Documents" + ' ...', :class => "search-query") %>
+        <button class="btn btn-inverse search-query" type="submit">Search</button>
+      </div>
+      <% end %>
+
         <ul class="nav pull-right">
           <li><%= link_to "Scanners",    scanners_path  %></li>
           <li><%= link_to "Documents",   documents_path %></li>

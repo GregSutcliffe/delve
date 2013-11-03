@@ -7,7 +7,7 @@ module DocumentsHelper
     date_string = doc.relevant_date.blank? ? "No date set" : doc.relevant_date
     location_string = "Location: #{doc.location.blank? ? "No hardcopy" : doc.location }"
     content_tag(:button, date_string, :class => "btn btn-default", :disabled => true) +
-    link_to(location_string, '#', :class => "btn btn-default", :disabled => doc.location.blank?)
+    link_to(location_string, documents_path(doc, :search => "location = #{doc.location}"), :class => "btn btn-default", :disabled => doc.location.blank?)
   end
 
   def document_edit_buttons doc
