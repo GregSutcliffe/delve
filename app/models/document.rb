@@ -1,4 +1,3 @@
-
 class Document < ActiveRecord::Base
 
   include FileCleanup

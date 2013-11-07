@@ -34,4 +34,12 @@ class PagesController < ApplicationController
     @page = Page.new
   end
 
+  def rotate
+    @page = Page.find(params[:id])
+    @doc = @page.document
+    @page.rotate! params[:direction]
+
+    redirect_to @doc
+  end
+
 end

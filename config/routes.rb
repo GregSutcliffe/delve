@@ -12,7 +12,12 @@ Delve::Application.routes.draw do
     end
   end
 
-  resources :pages
+  resources :pages do
+    member do
+      get   'rotate'
+    end
+  end
+
   resources :documents do
     member do
       patch 'upload'
