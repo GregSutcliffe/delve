@@ -13,6 +13,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'sane-ffi'
 gem 'rmagick', '2.13.2'
 gem 'acts-as-taggable-on'
+gem 'acts_as_list'
 gem 'scoped_search'
 
 # DB for everyone

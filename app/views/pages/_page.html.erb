@@ -5,16 +5,6 @@
                  :target => "_blank" %>
   </div>
   <div class="caption center">
-    <div class="btn-group left">
-      <%= link_to raw("<i class=\"icon-arrow-left\"></i>"), '#', class: "btn btn-small" %>
-      <%= link_to raw("<i class=\"icon-chevron-left\"></i>"),
-        rotate_page_path(page, :direction => :anticlockwise), class: "btn btn-small" %>
-      <%= link_to raw("<i class=\"icon-trash icon-white\"></i>"), page_path(page),
-        class: "btn btn-small btn-danger",
-        method: :delete, data: { confirm: 'Are you sure?' } %>
-      <%= link_to raw("<i class=\"icon-chevron-right\"></i>"),
-        rotate_page_path(page, :direction => :clockwise), class: "btn btn-small" %>
-      <%= link_to raw("<i class=\"icon-arrow-right\"></i>"), '#', class: "btn btn-small" %>
-    </div>
+    <%= action_buttons(page) %>
   </div>
 </li>

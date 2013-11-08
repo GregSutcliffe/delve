@@ -42,4 +42,16 @@ class PagesController < ApplicationController
     redirect_to @doc
   end
 
+  def move
+    @page = Page.find(params[:id])
+    @doc = @page.document
+    if params[:direction] == "higher"
+      @page.move_higher
+    else
+      @page.move_lower
+    end
+
+    redirect_to @doc
+  end
+
 end

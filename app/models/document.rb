@@ -2,7 +2,7 @@ class Document < ActiveRecord::Base
 
   include FileCleanup
 
-  has_many :pages, dependent: :destroy
+  has_many :pages, -> { order("position DESC") }, dependent: :destroy
   before_destroy { |d| d.ensure_file_deleted pdf_path }
   acts_as_taggable
   scoped_search :on => [:name, :location]
@@ -73,6 +73,5 @@ class Document < ActiveRecord::Base
       super
     end
   end
-
 
 end

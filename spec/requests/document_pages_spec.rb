@@ -152,7 +152,6 @@ describe "DocumentPages" do
         response.status.should eq(302)
       end
 
-
       it "should not upload unsupported formats" do
         patch upload_document_path(doc), :document => { :image => png  }
         flash[:success].should be_nil
@@ -161,6 +160,43 @@ describe "DocumentPages" do
       end
 
     end
+
+    describe "individual pages" do
+      it { should have_link('Move Up',              href: move_page_path(p1, :direction => 'higher')) }
+      it { should have_link('Rotate Anticlockwise', href: rotate_page_path(p1, :direction => 'anticlockwise')) }
+      it { should have_link('Delete Page',          href: page_path(p1)) }
+      it { should have_link('Rotate Clockwise',     href: rotate_page_path(p1, :direction => 'clockwise')) }
+      it { should have_link('Move Down',            href: move_page_path(p1, :direction => 'lower')) }
+
+      it "should delete a page" do
+        expect { find_by_id("delete_#{p1.id}").click }.to change(doc.pages, :count).by(-1)
+      end
+      it "should rotate a page" do
+        Page.any_instance.should_receive(:rotate!) {p1}
+        find_by_id("rotate_anti_#{p1.id}").click
+      end
+      it "should move a page up" do
+        p2.position.should eq(2)
+        find_by_id("move_up_#{p2.id}").click
+        p2.reload.position.should eq(1)
+      end
+      it "should move a page down" do
+        p1.position.should eq(1)
+        find_by_id("move_down_#{p1.id}").click
+        p1.reload.position.should eq(2)
+      end
+      it "should not move first page up" do
+        p1.position.should eq(1)
+        find_by_id("move_up_#{p1.id}").click
+        p1.reload.position.should eq(1)
+      end
+      it "should not move last page down" do
+        p2.position.should eq(2)
+        find_by_id("move_down_#{p2.id}").click
+        p2.reload.position.should eq(2)
+      end
+    end
+
   end
 
   describe "edit" do

@@ -15,6 +15,7 @@ Delve::Application.routes.draw do
   resources :pages do
     member do
       get   'rotate'
+      get   'move'
     end
   end
 
