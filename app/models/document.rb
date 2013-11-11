@@ -28,7 +28,6 @@ class Document < ActiveRecord::Base
     self.pdf_path = filename
 
     # create pages
-    pdf_pages = []
     images = Magick::ImageList.new(location) do
       self['density'] = '300' # use 300 DPI for pdf conversion, same as for scanning
     end
@@ -36,10 +35,10 @@ class Document < ActiveRecord::Base
       name     = Time.now.strftime(DATE_FORMAT) + ".jpg"
       location = File.join(STORAGE_DIR,name)
       image.write(location)
-      pdf_pages << Page.create(:path => name)
+      File.chmod(0644,location)
+      Page.create(:path => name, :document => self )
     end
 
-    self.pages << pdf_pages
     self.save
   end
 
@@ -48,6 +47,7 @@ class Document < ActiveRecord::Base
     name = Time.now.strftime(DATE_FORMAT) + ".jpg"
     location = File.join(STORAGE_DIR,name)
     FileUtils.cp path_to_file, location
+    File.chmod(0644,location)
     Page.create(:path => name, :document => self )
   end
 

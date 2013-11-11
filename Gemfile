@@ -11,13 +11,13 @@ gem 'bootstrap-will_paginate', '0.0.9'
 # Core functionality
 
 gem 'sane-ffi'
-gem 'rmagick', '2.13.2'
+gem 'rmagick', '>= 2.13.1'
 gem 'acts-as-taggable-on'
 gem 'acts_as_list'
 gem 'scoped_search'
 
 # DB for everyone
-gem 'sqlite3', '1.3.8'
+gem 'sqlite3', '>= 1.3.6'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
@@ -47,5 +47,5 @@ end
 
 group :production do
   gem 'pg', '0.15.1'
-  gem 'rails_12factor', '0.0.2'
+  #gem 'rails_12factor', '0.0.2'
 end
