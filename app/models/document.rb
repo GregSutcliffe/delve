@@ -7,7 +7,7 @@ class Document < ActiveRecord::Base
   acts_as_taggable
   scoped_search :on => [:name, :location]
   scoped_search :on => :relevant_date, :aliases => [:date]
-  # scoped_search :in => :tags, :on => :name, :alias => :tag
+  scoped_search :in => :tags, :on => :name, :alias => :tag
 
   validates :name, presence: true, uniqueness: true
   # Don't have to set a pdf_path, but it must be unique if it is set.
