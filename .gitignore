@@ -24,6 +24,9 @@ coverage
 # Scanned images
 public/scans
 
+# Compiled assets
+public/assets/
+
 # # Ignore other unneeded files.
 *.swp
 *~

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails / JS / CSS stuff
-gem 'rails', '4.0.1.rc1'
+gem 'rails'
 gem 'bootstrap-sass', '<3.0'
 gem "twitter-bootstrap-rails"
 gem 'bootstrap-datepicker-rails'
@@ -32,9 +32,9 @@ group :test do
   gem 'timecop'
 end
 
-gem 'sass-rails', '4.0.0'
+gem 'sass-rails', '4.0.2'
 gem 'uglifier', '2.1.1'
-gem 'coffee-rails', '4.0.0'
+gem 'coffee-rails'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
