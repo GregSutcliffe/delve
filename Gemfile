@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails / JS / CSS stuff
-gem 'rails'
+gem 'rails', '4.0.2'
 gem 'bootstrap-sass', '<3.0'
 gem "twitter-bootstrap-rails"
 gem 'bootstrap-datepicker-rails'
